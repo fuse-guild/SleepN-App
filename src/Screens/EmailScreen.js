@@ -6,7 +6,7 @@ const BorderContainer = ({ children, style }) => {
     let innerStyle = style || {}
     return <View style={{
         ...innerStyle,
-        padding: 10,
+        padding: 5,
         borderRadius: 10,
         display: 'flex',
         justifyContent: 'center'
@@ -29,7 +29,7 @@ export default function EmailScreen({ navigation, route }) {
         }
     }
 
-    return <View style={{ paddingHorizontal: 20, paddingTop: 60, display: 'flex', flexDirection: 'column' }}>
+    return <View style={{ paddingHorizontal: 20, paddingTop: 20, display: 'flex', flexDirection: 'column' }}>
         <View style={{ alignSelf: 'flex-start' }}>
             <Button onPress={() => navigation.goBack()} title='Back' />
         </View>

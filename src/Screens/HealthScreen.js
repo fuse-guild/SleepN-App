@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react'
-import { ScrollView, SafeAreaView, View, Text, Button, TouchableOpacity } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { ScrollView, SafeAreaView, View, Text, Button, TouchableOpacity, Modal } from 'react-native'
 
 import AppleHealthKit, {
     HealthValue,
     HealthKitPermissions,
 } from 'react-native-health'
+import FitbitAuthScreen from './FitbitAuthScreen'
 
 
 const GlassSurface = ({ children, style }) => {
@@ -15,7 +16,7 @@ const GlassSurface = ({ children, style }) => {
             shadowColor: 'black',
             shadowOpacity: 0.1,
             shadowRadius: 7,
-            shadowOffset: '0 0',
+            // shadowOffset: '0',
             padding: 10,
             backgroundColor: 'white'
         }}
@@ -40,9 +41,26 @@ const RoundedButton = (props) => {
     </TouchableOpacity>
 }
 
+function FitbitAuthModal(props) {
+    return <Modal
+        animationType='slide'
+        transparent={false}
+        visible={props.visible || false}
+        onRequestClose={() => props.setModalVisible(false)}
+    >
+        <View style={{ marginTop: 40, alignItems: 'flex-start' }}>
+            <Button title='Close' onPress={() => props.setModalVisible(false)} />
+        </View>
+
+        <FitbitAuthScreen />
+    </Modal>
+}
+
 function HealthPage() {
+    const [modalVisible, setModalVisible] = useState(false)
 
     return <SafeAreaView>
+        <FitbitAuthModal visible={modalVisible} setModalVisible={setModalVisible} />
         <ScrollView
             contentContainerStyle={{
                 alignItems: 'center',
@@ -85,8 +103,16 @@ function HealthPage() {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                justifyContent: 'center'
-            }}></GlassSurface>
+            }}>
+                <Text style={{
+                    textAlign: 'center',
+                    marginTop: 10
+                }}>No sleep data found. Please connect your Fitbit account to view your data and receive $SLEEP rewards.</Text>
+                <RoundedButton style={{
+                    width: 272,
+                    marginTop: 20
+                }} title='Connect Fitbit' onPress={() => setModalVisible(true)} />
+            </GlassSurface>
         </ScrollView>
 
     </SafeAreaView >

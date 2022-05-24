@@ -12,7 +12,6 @@ import com.facebook.soloader.SoLoader;
 import com.sleepn.newarchitecture.MainApplicationReactNativeHost;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-import com.ovalmoney.fitness.RNFitnessPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 

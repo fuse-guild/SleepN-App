@@ -9,7 +9,7 @@ const StartScreen = ({ navigation }) => {
         <Text style={styles.headline}>Sleepn</Text>
         <Text style={styles.subheader}>Sleep better, earn crypto</Text>
 
-        <Text style={{ fontSize: 16, paddingTop: 80 }}>How it works:</Text>
+        <Text style={{ fontSize: 16, paddingTop: 40 }}>How it works:</Text>
 
         <Text style={styles.featureItem}><B>Mint a Bedroom NFT</B> for membership{'\n'}to the game & enchanted rewards</Text>
         <Text style={styles.featureItem}><B>Connect a wearable</B> to measure your{'\n'}sleep quality</Text>
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         paddingLeft: 30,
         paddingRight: 30,
-        paddingTop: 80
+        paddingTop: 40
     },
     headline: {
         fontSize: 48,
