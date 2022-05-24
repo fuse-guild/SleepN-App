@@ -5,6 +5,7 @@ import WalletConnectProvider from '@walletconnect/web3-provider'
 import Web3 from 'web3'
 
 import dex from '../abis/Dex.json'
+import bedroomNft from '../abis/BedroomNft.json'
 
 async function buildProvider(connector) {
     let wcProvider = new WalletConnectProvider({
@@ -71,9 +72,8 @@ export default function BedroomScreen() {
 
     useEffect(() => {
         if (account && !provider) {
-            let pp = buildProvider(connector)
-            console.log(pp)
-            setProvider(pp)
+            buildProvider(connector)
+                .then(setProvider)
         }
     }, [account])
 
@@ -115,14 +115,24 @@ function NftBox({ children }) {
 
 function ConnectedContent({ provider, account, disconnect }) {
     const mintNft = async () => {
-        let p = await provider
-        let contract = new p.eth.Contract(dex.abi, '0x41D0fF135f6e50e9b5Bc6e030E7573703179D960', {
+        let contract = new provider.eth.Contract(dex.abi, '0x41D0fF135f6e50e9b5Bc6e030E7573703179D960', {
             from: account
         })
         contract.methods.buyNft(0, 0).send()
             .then(console.log)
             .catch(console.log)
     }
+
+    const loadNft = async () => {
+        let contract = new provider.eth.Contract(bedroomNft.abi, '0xb150a58d376DeF437AB8b19ab351db7BA2C1eDEe', {
+            from: account
+        })
+        contract.methods.balanceOf(account, 0).call()
+            .then(console.log)
+            .catch(console.log)
+    }
+
+    loadNft()
 
     return <View style={{
         display: 'flex',

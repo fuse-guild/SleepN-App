@@ -3,10 +3,14 @@ import { Button, SafeAreaView } from 'react-native'
 import { WebView } from 'react-native-webview'
 import * as crypto from 'crypto'
 
-export default function FitbitAuthScreen() {
+export default function FitbitAuthScreen(props) {
 
     function handleWebNavigationState(newNavState) {
-
+        if (newNavState.url.includes('?code=')) {
+            // TODO: extract auth code and send it to our server
+            // so we can read sleep data and produce rewards
+            props.onSuccessAuth()
+        }
     }
 
     function buildFitbitAuthUrl() {

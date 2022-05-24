@@ -52,7 +52,7 @@ function FitbitAuthModal(props) {
             <Button title='Close' onPress={() => props.setModalVisible(false)} />
         </View>
 
-        <FitbitAuthScreen />
+        <FitbitAuthScreen onSuccessAuth={() => props.setModalVisible(false)} />
     </Modal>
 }
 
